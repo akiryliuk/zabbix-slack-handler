@@ -52,7 +52,7 @@ After that zabbix will send notifications to Slack
 
 SLACK_BOT_TOKEN and SLACK_VERIFICATION_TOKEN you need to get in Slack API [Create New App](https://api.slack.com/apps?new_app=1)
 
-And you need create Interactive component In your Slack App with Callback ID: "Ack" as you can see below
+And you need create Interactive component In your Slack App with Callback ID: "ack" as you can see below
 ![create-interactive-component](img/create-interactive-component.png)
 
 Run docker container on your host example.com:
