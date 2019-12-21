@@ -20,31 +20,31 @@ This [`slack_alert.py`](src/slack_alert.py) script needs to be placed in the `Al
     ls -lah /usr/lib/zabbix/alertscripts/slack_alert.py
     -rwxr-xr-x 1 root root 2.0K Dec 21 18:51 /usr/lib/zabbix/alertscripts/slack_alert.py
 
-You need to change SLACK_BOT_TOKEN in script to your real token
+
+You need to change SLACK_BOT_TOKEN in script to your real token  
 And install [`requierements.txt`](src/requierements.txt)
     
     pip install -r requirements.txt
 
-#####In zabbix "Administration -> Media types -> Create media type"
+
+##### In zabbix "Administration -> Media types -> Create media type"
 ![create-media-type](img/create-media-type.png)
 
-#####In zabbix Configuration -> Actions -> Create Action  
+##### In zabbix Configuration -> Actions -> Create Action  
 ##### Operations  
 |                 |              |
 | --------------- |:-------------|
 | Default subject | {EVENT.ID} |  
-| Default message | {TRIGGER.STATUS}: {EVENT.NAME}: *{HOST.NAME1}* |  
-|                 | <https://z.crutches.space/zabbix/history.php?action=showgraph&itemids%5B%5D={ITEM.ID1}\|{ITEM.NAME1}>: *{ITEM.VALUE1}* |    
-|                 | Event: <https://z.crutches.space/zabbix/tr_events.php?triggerid={TRIGGER.ID}&eventid={EVENT.ID}\|{EVENT.ID}> |  
+| Default message | {TRIGGER.STATUS}: {EVENT.NAME}: *{HOST.NAME1}*<br><https://z.crutches.space/zabbix/history.php?action=showgraph&itemids%5B%5D={ITEM.ID1}\|{ITEM.NAME1}>: *{ITEM.VALUE1}* <br> Event: <https://z.crutches.space/zabbix/tr_events.php?triggerid={TRIGGER.ID}&eventid={EVENT.ID}\|{EVENT.ID}> |  
 
 ##### Recovery operations
 |                 |              |
 | --------------- |:-------------|
 | Default subject | {EVENT.ID} |  
-| Default message | {TRIGGER.STATUS}: {EVENT.NAME}: *{HOST.NAME1}* |  
-|                 | <https://z.crutches.space/zabbix/history.php?action=showgraph&itemids%5B%5D={ITEM.ID1}|{ITEM.NAME1}>: *{ITEM.LASTVALUE1}* |  
+| Default message | {TRIGGER.STATUS}: {EVENT.NAME}: *{HOST.NAME1}* <br> <https://z.crutches.space/zabbix/history.php?action=showgraph&itemids%5B%5D={ITEM.ID1}|{ITEM.NAME1}>: *{ITEM.LASTVALUE1}* |  
 
 Its my example but you can change "Default message" as you want  
+And you should not change subject, because {EVENT.ID} used in "Acknowledge" button  
 
 After that zabbix will send notifications to Slack  
 
