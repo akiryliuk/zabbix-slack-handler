@@ -20,19 +20,22 @@ if len(sys.argv)<3:
 
 slack_channel = sys.argv[1]
 zabbix_event_id = sys.argv[2]
-slack_message = sys.argv[3]
+slack_messages = sys.argv[3]
+slack_message_list = slack_messages.splitlines()
+slack_subject = slack_message_list[0]
+slack_message = '\n'.join(slack_message_list[1:])
 
 slack_actions = []
 slack_emoji = 'WTF: :ghost:'
 slack_color = '#439FE0OB'
 # Change emoji depending on the subject - smile (RECOVERY/OK), frowning (PROBLEM), or ghost (for everything else)
-if re.match(r'^RECOVER(Y|ED)?$', slack_message):
+if re.match(r'^RECOVER(Y|ED)?$', slack_subject):
     slack_emoji = ":smile:"
     slack_color = '#76C858'
-elif re.match(r'^OK', slack_message):
+elif re.match(r'^OK', slack_subject):
     slack_emoji = ':smile:'
     slack_color = '#76C858'
-elif re.match(r'^PROBLEM', slack_message):
+elif re.match(r'^PROBLEM', slack_subject):
     slack_emoji = ':fire:'
     slack_color = '#DC513F'
     slack_actions = [{"type": "button",
@@ -61,7 +64,7 @@ attachments_json = [{ "text": "{}".format(slack_message),
 slack_client.api_call(
     "chat.postMessage",
     channel=slack_channel,
-    text=slack_emoji,
+    text="{} {}".format(slack_emoji,slack_subject),
     attachments=attachments_json,
     mrkdwn=True
 )
